@@ -5,10 +5,10 @@ CXX = gcc
 CFLAGS = -O3 -g
 
 
-all: test
+all: main
 
-test: test.o indirect.o nonret.o tailcalls.o data.o
-	$(CXX) $(CFLAGS) test.o indirect.o nonret.o tailcalls.o data.o -o test
+main: main.o indirect.o nonret.o tailcalls.o data.o
+	$(CXX) $(CFLAGS) main.o indirect.o nonret.o tailcalls.o data.o -o test
 
 indirect.o: indirect.c
 	$(CXX) $(CFLAGS) -c indirect.c  
@@ -22,8 +22,8 @@ tailcalls.o: tailcalls.c
 data.o : data.c
 	$(CXX) $(CFLAGS) -c data.c
 
-test.o: test.c
-	$(CXX) $(CFLAGS) -c test.c
+main.o: main.c
+	$(CXX) $(CFLAGS) -c main.c
 
 clean:
-	rm -f *.o test
+	rm -f *.o main
