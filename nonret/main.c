@@ -22,10 +22,6 @@ int nonret_trivial_2(int x) {
 }
 
 
-/**
- * type: recurisve
- * two function recurisive call each other
- */
 int nonret_recurisve_helper_1(int x);
 
 int nonret_recurisve_helper_2(int x) {
@@ -68,7 +64,7 @@ int nonret_recurisve(int x) {
  * type: dataflow analysis
  */
 int nonret_dataflow_callee(int x) {
-    if (x > 0) {
+    if (x >= 0) {
         exit(0);
     }
     return 0;
@@ -94,9 +90,9 @@ int main() {
         nonret_trivial_2(x);
     } else if (x < 3) {
         nonret_recurisve(x);
-    } else {
-        nonret_dataflow(x);
     }
+
+    nonret_dataflow(x);
     
     printf("never reached");
 }
