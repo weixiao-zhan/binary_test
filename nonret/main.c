@@ -29,14 +29,22 @@ int nonret_trivial_2(int x) {
 int nonret_recurisve_helper_1(int x);
 
 int nonret_recurisve_helper_2(int x) {
-    if (x < 10) nonret_recurisve_helper_1(x + 10);
-    else exit(0);
+    if (x < 10) {
+        nonret_recurisve_helper_1(x + 10);
+    } else {
+        exit(0);
+    }
+    
     return 1;
 }
 
 int nonret_recurisve_helper_1(int x) {
-    if (x > 10) nonret_recurisve_helper_2(x - 10);
-    else exit(1);
+    if (x > 10) {
+        nonret_recurisve_helper_2(x - 10);
+    } else {
+        exit(1);
+    }
+
     return 0;
 }
 
@@ -59,11 +67,21 @@ int nonret_recurisve(int x) {
 /**
  * type: dataflow analysis
  */
-int nonret_dataflow(int x) {
+int nonret_dataflow_callee(int x) {
     if (x > 0) {
         exit(0);
     }
     return 0;
+}
+
+int nonret_dataflow(int x) {
+    if (x > 0) {
+        x = nonret_dataflow_callee(x);
+    } else {
+        x = nonret_dataflow_callee(x * -1);
+    }
+    printf("never reached");
+    return x;
 }
 
 int main() {
@@ -76,7 +94,9 @@ int main() {
         nonret_trivial_2(x);
     } else if (x < 3) {
         nonret_recurisve(x);
-    } else if (x < 4) {
+    } else {
         nonret_dataflow(x);
     }
+    
+    printf("never reached");
 }
