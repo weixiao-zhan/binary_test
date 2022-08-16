@@ -1,12 +1,8 @@
 CXX = gcc
-CFLAGS = -Og  -g
-#CFLAGS = -O1 -g
-#CFLAGS = -O2 -g
-#CFLAGS = -O3 -g
-
 
 main: main.c
-	$(CXX) $(CFLAGS) main.c -o test
+	$(CXX) -Og -g main.c -o test_nonret_Og_g
+	$(CXX) -O3 -g main.c -o test_nonret_O3_g
 
 clean:
 	rm -f test

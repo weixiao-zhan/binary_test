@@ -6,8 +6,13 @@
  * all control flow ended in well-known non-return function
  */
 int nonret_trivial_1(int x) {
-    if (x < 10) exit(0);
-    else exit(-1);
+    if (x < 10) {
+        exit(0);
+    } else {
+        exit(-1);
+        printf("never reached");
+    }
+
     return 0;
 }
 
@@ -16,11 +21,30 @@ int nonret_trivial_1(int x) {
  * all control flow ended in non-return function
  */
 int nonret_trivial_2(int x) {
-    if (x < 10) nonret_trivial_1(0);
-    else exit(-1);
+    if (x < 10) {
+        nonret_trivial_1(0);
+        printf("never reached");
+    } else {
+        exit(-1);
+    }
+    
     return 0;
 }
 
+/**
+ * type: trivial
+ * all control flow ended in non-return function
+ */
+int nonret_trivial_3(int x) {
+    if (x < 10) {
+        nonret_trivial_2(0);
+        printf("never reached");
+    } else {
+        exit(-1);
+    }
+    
+    return 0;
+}
 
 int nonret_recurisve_helper_1(int x);
 
@@ -46,7 +70,7 @@ int nonret_recurisve_helper_1(int x) {
 
 /**
  * type: recurisve
- * two function recurisive call each other
+ * two function recursive call each other
  */
 int nonret_recurisve(int x) {
     if (x < 10) {
