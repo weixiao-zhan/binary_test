@@ -47,24 +47,37 @@ int nonret_trivial_3(int x) {
 }
 
 int nonret_recurisve_helper_1(int x);
-
-int nonret_recurisve_helper_2(int x) {
-    if (x < 10) {
-        nonret_recurisve_helper_1(x + 10);
-    } else {
-        exit(0);
-    }
-    
-    return 1;
-}
+int nonret_recurisve_helper_2(int x);
+int nonret_recurisve_helper_3(int x);
 
 int nonret_recurisve_helper_1(int x) {
     if (x > 10) {
         nonret_recurisve_helper_2(x - 10);
+        printf("never reached");
     } else {
-        exit(1);
+        nonret_recurisve_helper_3(x);
+        printf("never reached");
     }
-
+    return 0;
+}
+int nonret_recurisve_helper_2(int x) {
+    if (x > 10) {
+        nonret_recurisve_helper_3(x - 10);
+        printf("never reached");
+    } else {
+        nonret_recurisve_helper_1(x);
+        printf("never reached");
+    }
+    return 0;
+}
+int nonret_recurisve_helper_3(int x) {
+    if (x > 10) {
+        nonret_recurisve_helper_1(x - 10);
+        printf("never reached");
+    } else {
+        nonret_recurisve_helper_2(x);
+        printf("never reached");
+    }
     return 0;
 }
 
@@ -78,7 +91,7 @@ int nonret_recurisve(int x) {
     } else if (x >= 10 && x < 20) {
         nonret_recurisve_helper_2(x);
     } else {
-        nonret_recurisve_helper_1(x - 10);
+        nonret_recurisve_helper_3(x - 10);
     }
 
     return 0;
