@@ -100,11 +100,15 @@ int nonret_recurisve(int x) {
 /**
  * type: dataflow analysis
  */
-int nonret_dataflow_callee(int x) {
+int __attribute__((optimize("Og"))) nonret_dataflow_callee(int x) {
     if (x >= 0) {
         exit(0);
     }
-    return 0;
+    return x;
+}
+
+int ret_dataflow(int x) {
+    return nonret_dataflow_callee(x);
 }
 
 int nonret_dataflow(int x) {
@@ -119,7 +123,7 @@ int nonret_dataflow(int x) {
 
 int main() {
     int x;
-    scanf("%d", &x);
+    int n = scanf("%d", &x);
 
     if (x < 1) {
         nonret_trivial_1(x);
