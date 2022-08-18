@@ -121,19 +121,23 @@ int nonret_dataflow(int x) {
     return x;
 }
 
-int main() {
-    int x;
-    int n = scanf("%d", &x);
+int x;
 
+int main() {
+    int n = scanf("%d", &x);
+    
+    nonret_dataflow(x);
+    printf("never reached");
+    
     if (x < 1) {
         nonret_trivial_1(x);
     } else if (x < 2) {
         nonret_trivial_2(x);
     } else if (x < 3) {
+        nonret_trivial_3(x);
+    } else {
         nonret_recurisve(x);
     }
 
-    nonret_dataflow(x);
-    
     printf("never reached");
 }
