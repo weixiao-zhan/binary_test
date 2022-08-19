@@ -85,10 +85,8 @@ void std_exception() {
     try{
         int* tmp = new int;
         *(tmp + 32768) = 1;
-        puts("never reached");
         delete tmp;
     } catch (std::exception& e) {
-        puts("catched: ");
-        puts(e.what());
+        printf("catched: %s\n", e.what());
     }
 }
