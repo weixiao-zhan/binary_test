@@ -37,24 +37,24 @@ public:
     }
 };
 
-void my_exception() {
+void my_exception_easy() {
+    try {
+        child_class c = child_class();
+        throw_int();
+    } catch (int myNum) {
+        printf("catched: %d\n", myNum);
+    }
+}
+
+void my_exception_nested() {
     try {
         child_class c = child_class();
         c.mod();
         
-        int x;
-        int t = scanf("%d", &x);
-        if (x % 2) {
-            throw_int();
-        } else {
-            throw_bool();
-        }
+        throw_bool();
         
         parent_class p = child_class();
         p.mod();
-
-        printf("never reached\n");
-
     } catch (int myNum) {
         printf("catched: %d\n", myNum);
     } catch (bool myBool) {
