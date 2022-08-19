@@ -30,7 +30,9 @@ int loop() {
 int main() {
     cout << recursive(10) << "\n";
     loop();
-    my_exception_easy();
-    my_exception_nested();
+    my_exception_1();
+    my_exception_2();
+    my_exception_3();
+    std_exception();
     return 0;
 }
