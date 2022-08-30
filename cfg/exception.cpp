@@ -3,6 +3,14 @@
 
 using namespace std;
 
+class simple_exception {
+public:
+    simple_exception();
+    ~simple_exception();
+};
+simple_exception::simple_exception() {}
+simple_exception::~simple_exception() {}
+
 class parent_class {
 public:
     int* ptr;
@@ -10,7 +18,6 @@ public:
     ~parent_class();
     void modify();
 };
-
 parent_class::parent_class() {
     printf("constructor of parent_class\n");
     ptr = new int;
@@ -31,7 +38,6 @@ public:
     ~child_class();
     void modify();
 };
-
 child_class::child_class()
     : parent_class(){
     printf("constructor of child_class\n");
@@ -49,9 +55,9 @@ void child_class::modify() {
 
 void my_exception_1() {
     try {
-        throw(1);
-    } catch (int myNum) {
-        printf("catched: %d\n", myNum);
+        throw(simple_exception());
+    } catch (simple_exception& e) {
+        printf("catched");
     }
 }
 
