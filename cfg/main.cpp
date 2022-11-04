@@ -10,7 +10,7 @@ int recursive(int n) {
     return recursive(n-1)+n;
 }
 
-int loop() {
+int loop1() {
     int num[10][10];
     int sum;
     for (int x = 0; x < 10; x++){
@@ -27,9 +27,26 @@ int loop() {
     return sum;
 }
 
+void loop2(){
+    int x,y,i;
+    scanf("%d %d",&x, &y);
+    if (x+y > 10) {
+        while (x + y < 100) {
+	    x = x + y;
+	    L: y = y + x / 2;
+	}
+    }
+    else {
+        goto L;
+    }
+
+    printf("%d %d\n",x ,y);
+}
+
 int main() {
     cout << recursive(10) << "\n";
-    loop();
+    loop1();
+    loop2();
     my_exception_1();
     my_exception_2();
     my_exception_3();
