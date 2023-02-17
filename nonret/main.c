@@ -101,7 +101,7 @@ int nonret_recurisve(int x) {
  * type: dataflow analysis
  */
 int __attribute__((optimize("Og"))) nonret_dataflow_callee(int x) {
-    if (x >= 0) {
+    if (x <= 0) {
         exit(0);
     }
     return x;
@@ -112,7 +112,7 @@ int ret_dataflow(int x) {
 }
 
 int nonret_dataflow(int x) {
-    if (x > 0) {
+    if (x <= 0) {
         x = nonret_dataflow_callee(x);
     } else {
         x = nonret_dataflow_callee(x * -1);
